@@ -1,0 +1,9 @@
+# Spring Boot application Startup Port
+server:
+  port: 8799
+
+# Spring Boot application Configuration
+spring:
+  application:
+    name: Milk-Dairy-Management-Web-Services
+    version: 0.0.1
