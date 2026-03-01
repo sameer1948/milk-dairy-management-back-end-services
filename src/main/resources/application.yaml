@@ -1,9 +1,47 @@
 # Spring Boot application Startup Port
 server:
   port: 8799
+# Context root for the Application
+  servlet:
+    context-path: /v1/api/milk-dairy-management
 
 # Spring Boot application Configuration
 spring:
   application:
     name: Milk-Dairy-Management-Web-Services
     version: 0.0.1
+  profiles:
+    active: ${RUNTIME_ENV:dev}
+    group:
+      dev: development
+      prod: production
+      test: test
+
+  datasource:
+#    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: jdbc:mysql://mysql:3306/milk_dairy_db
+    username: ahsuna
+    password: Sameer
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      initialization-fail-timeout: 60000 # 60 seconds # Ensures that the application waits for the database to be ready before starting
+      connection-timeout: 30000 # 30 seconds # Maximum time to wait for a connection from the pool
+
+    # JPA and Hibernate Configuration
+    jpa:
+      show-sql: true
+      open-in-view: true
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+      hibernate:
+        ddl-auto: none
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL8Dialect
+          format_sql: true
+          show_sql: true
+          generate_statistics: true
+          connection:
+            autoReconnect: true
+            autocommit: true
